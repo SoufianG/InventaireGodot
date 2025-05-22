@@ -1,4 +1,4 @@
-@icon("res://UI/Icons/Items/resource_icon.png")
+@icon("res://Assets/Sprites/UI/Icons/Items/resource_icon.png")
 # Scripts/Items/ResourceItem.gd
 extends "res://Scripts/Items/Item.gd"
 class_name ResourceItem

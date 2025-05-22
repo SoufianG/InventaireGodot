@@ -1,4 +1,4 @@
-@icon("res://Assets/Icons/consumable_item.png")
+@icon("res://Assets/Sprites/UI/Icons/Items/consumable_icon.png")
 extends Item
 class_name ConsumableItem
 

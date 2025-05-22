@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpl801qvx3d36"
-path="res://.godot/imported/consumable_icon.png-e596e74cb9da838fc83c67882974e429.ctex"
+uid="uid://c6h1vlhe08a8n"
+path="res://.godot/imported/PlumeGriffon.png-453e53d5f0774c6a612cc4cbf4f0ae16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Icons/Items/consumable_icon.png"
-dest_files=["res://.godot/imported/consumable_icon.png-e596e74cb9da838fc83c67882974e429.ctex"]
+source_file="res://Assets/Sprites/Items/resources/PlumeGriffon.png"
+dest_files=["res://.godot/imported/PlumeGriffon.png-453e53d5f0774c6a612cc4cbf4f0ae16.ctex"]
 
 [params]
 

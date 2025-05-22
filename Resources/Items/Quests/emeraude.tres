@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="QuestItem" load_steps=3 format=3 uid="uid://ewu5akmvcmir"]
+
+[ext_resource type="Texture2D" uid="uid://co7bw3lufi0kk" path="res://Assets/Sprites/Items/quest_items/Emeraude.png" id="1_5eg7a"]
+[ext_resource type="Script" uid="uid://dshdgmi2eyur" path="res://Scripts/Items/QuestItem.gd" id="1_xoyk1"]
+
+[resource]
+script = ExtResource("1_xoyk1")
+quest_name = "Tuto"
+is_consumed_on_use = false
+id = "emeraude"
+name = "Emeraude magique"
+description = "Une émeraude dont émane une chaleur magique."
+icon = ExtResource("1_5eg7a")
+category = 3
+rank = 4
+is_stackable = false
+max_stack = 1
+drop_rate = 0.0
+metadata/_custom_type_script = "uid://dshdgmi2eyur"

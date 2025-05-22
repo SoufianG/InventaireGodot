@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcs47q8f1g23n"
-path="res://.godot/imported/quest_icon.png-5165e1e9fbce09492dcb47a3b0c7dab7.ctex"
+uid="uid://u40vgdjwp6ey"
+path="res://.godot/imported/equipment_icon.png-cbfc9b737315fd4cf851a04c458c96f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Icons/Items/quest_icon.png"
-dest_files=["res://.godot/imported/quest_icon.png-5165e1e9fbce09492dcb47a3b0c7dab7.ctex"]
+source_file="res://Assets/Sprites/UI/Icons/Items/equipment_icon.png"
+dest_files=["res://.godot/imported/equipment_icon.png-cbfc9b737315fd4cf851a04c458c96f3.ctex"]
 
 [params]
 

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://bs50reg1udpaf"]
+
+[ext_resource type="Texture2D" uid="uid://bksriw8y2sm7b" path="res://Assets/Sprites/Items/equipment/AnneauOr.png" id="1_75tqy"]
+[ext_resource type="Script" uid="uid://c58iqy45rn5" path="res://Scripts/Items/EquipmentItem.gd" id="1_fa601"]
+
+[resource]
+script = ExtResource("1_fa601")
+slot = 5
+min_health = 1
+max_health = 50
+min_force = 1
+max_force = 50
+min_mana = 1
+max_mana = 50
+min_attack_speed = 0.0
+max_attack_speed = 0.0
+min_magic_resist = 1.0
+max_magic_resist = 50.0
+min_physical_resist = 1.0
+max_physical_resist = 50.0
+min_move_speed = 0.0
+max_move_speed = 0.0
+id = "anneau_or"
+name = "Anneau en or"
+description = "Un anneau en or, son origine est inconnue"
+icon = ExtResource("1_75tqy")
+category = 0
+rank = 3
+is_stackable = false
+max_stack = 99
+drop_rate = 0.0
+metadata/_custom_type_script = "uid://c58iqy45rn5"

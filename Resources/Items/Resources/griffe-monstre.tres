@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ResourceItem" load_steps=3 format=3 uid="uid://cianparho4lqq"]
+
+[ext_resource type="Texture2D" uid="uid://bh0n6gueb3wcl" path="res://Assets/Sprites/Items/resources/GriffeMonstre.png" id="1_coj7l"]
+[ext_resource type="Script" uid="uid://cbrd664i4346p" path="res://Scripts/Items/ResourceItem.gd" id="1_nmbpv"]
+
+[resource]
+script = ExtResource("1_nmbpv")
+used_in_recipes = Array[String]([])
+id = "griffe_monstre"
+name = "Griffe de monstre"
+description = "Une griffe acérée appartenant à une créature sauvage."
+icon = ExtResource("1_coj7l")
+category = 2
+rank = 0
+is_stackable = true
+max_stack = 99
+drop_rate = 0.5
+metadata/_custom_type_script = "uid://cbrd664i4346p"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xqnq0aujvgw7"
-path="res://.godot/imported/equipment_icon.png-7e32bcc9904a8121cda3f95b03e92ddd.ctex"
+uid="uid://cmnlf1jf2b21p"
+path="res://.godot/imported/PotionMana.png-97a7fbb74f6897aa0175eddf001b31d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Icons/Items/equipment_icon.png"
-dest_files=["res://.godot/imported/equipment_icon.png-7e32bcc9904a8121cda3f95b03e92ddd.ctex"]
+source_file="res://Assets/Sprites/Items/consumables/PotionMana.png"
+dest_files=["res://.godot/imported/PotionMana.png-97a7fbb74f6897aa0175eddf001b31d0.ctex"]
 
 [params]
 

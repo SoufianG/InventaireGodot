@@ -1,4 +1,4 @@
-@icon("res://UI/Icons/Items/quest_icon.png")
+@icon("res://Assets/Sprites/UI/Icons/Items/quest_icon.png")
 # Scripts/Items/QuestItem.gd
 extends "res://Scripts/Items/Item.gd"
 class_name QuestItem

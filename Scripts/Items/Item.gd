@@ -1,4 +1,4 @@
-@icon("res://Assets/Icons/default_item.png")
+@icon("res://Assets/Sprites/UI/Icons/Items/default_icon.png")
 extends Resource
 class_name Item
 
