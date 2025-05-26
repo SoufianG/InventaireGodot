@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8kc3akgykqvp"]
+[gd_scene load_steps=3 format=3 uid="uid://b8kc3akgykqvp"]
 
 [ext_resource type="PackedScene" uid="uid://byxcsxj15yy77" path="res://Scenes/Characters/Player2/Player2.tscn" id="1_0nbjp"]
+[ext_resource type="PackedScene" uid="uid://fcdvakxo2ai1" path="res://Scenes/Monsters/Slime.tscn" id="2_xf6vi"]
 
 [node name="World" type="Node2D"]
 
+[node name="Slime" parent="." instance=ExtResource("2_xf6vi")]
+position = Vector2(83, 128)
+
 [node name="Player2" parent="." instance=ExtResource("1_0nbjp")]
-position = Vector2(568, 392)
-scale = Vector2(10, 10)
+position = Vector2(884, 191)

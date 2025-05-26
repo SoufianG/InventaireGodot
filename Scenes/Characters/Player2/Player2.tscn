@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://d0qplx1sqr3d1" path="res://Scripts/Player2/player_2.gd" id="1_10f73"]
 [ext_resource type="Texture2D" uid="uid://m36rx6jjeri2" path="res://Assets/Sprites/Characters/player-2.png" id="2_ihu26"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iyvum"]
-radius = 6.0
-height = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ihu26"]
+radius = 5.8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_56qly"]
 atlas = ExtResource("2_ihu26")
@@ -1097,16 +1096,17 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(0, -8.76925)
 
 [node name="Player2" type="CharacterBody2D"]
+scale = Vector2(5, 5)
 script = ExtResource("1_10f73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-shape = SubResource("CapsuleShape2D_iyvum")
+position = Vector2(0.2, 4)
+shape = SubResource("CircleShape2D_ihu26")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -8)
 sprite_frames = SubResource("SpriteFrames_ax721")
-animation = &"idle_front"
+animation = &"idle_back"
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

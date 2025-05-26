@@ -5,7 +5,7 @@ extends CharacterBody2D
 const speed:int = 200
 var attacking:bool = false
 var dying:bool = false
-var health:int = 100
+var health:int = 1000
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
@@ -30,8 +30,8 @@ func _physics_process(delta):
 		anim_tree.set("parameters/Attack/BlendSpace2D/blend_position", input_vector)
 		anim_tree.set("parameters/Walk/BlendSpace2D/blend_position", input_vector)
 		
-		hit(5)
-		print(health)
+		hit(0)
+		#print(health)
 		move_and_slide()
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
