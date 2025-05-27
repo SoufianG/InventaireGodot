@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
-@onready var player = get_node("/root/World/Player2")  
+@onready var player = get_node("/root/World/Player")  
 @onready var area_chase = $AreaChase
 @onready var area_attack = $AreaAttack
 
-const SPEED = 50
+const SPEED = 80
 const ATTACK_COOLDOWN = 3.0
 var can_attack = true
 var is_dead = false
@@ -19,6 +19,10 @@ var idle_timer = 0.0
 const IDLE_MIN = 1.0
 const IDLE_MAX = 3.0
 
+var last_direction = Vector2.DOWN  # c'est pour qu'il garde sa direction fixe apres avoir bougé
+var attack_cooldown_timer: Timer
+
+
 func _ready():
 	area_chase.connect("body_entered", Callable(self, "_on_chase_area_entered"))
 	area_chase.connect("body_exited", Callable(self, "_on_chase_area_exited"))
@@ -27,9 +31,18 @@ func _ready():
 	walk_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	walk_timer = WALK_CHANGE_INTERVAL
 	idle_timer = 0
+	
+	attack_cooldown_timer = Timer.new()
+	attack_cooldown_timer.wait_time = ATTACK_COOLDOWN
+	attack_cooldown_timer.one_shot = true
+	attack_cooldown_timer.connect("timeout", Callable(self, "_on_attack_cooldown_timeout"))
+	add_child(attack_cooldown_timer)
+
 
 func _physics_process(delta):
-	print(walk_direction)
+	
+	# print("Slime state:", state) #futur debug tu connais
+	
 	match state:
 		SlimeState.WALK:
 			walk_timer -= delta
@@ -50,6 +63,13 @@ func _physics_process(delta):
 				state = SlimeState.WALK
 				walk_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 				walk_timer = WALK_CHANGE_INTERVAL
+				
+		SlimeState.CHASE:
+			var direction = (player.global_position - global_position).normalized()
+			velocity = direction * SPEED
+			move_and_slide()
+			_play_animation("Chase", direction)
+
 
 func _update_blend_position(direction: Vector2):
 	anim_tree.set("parameters/Walk/BlendSpace2D/blend_position", direction)
@@ -57,7 +77,33 @@ func _update_blend_position(direction: Vector2):
 	anim_tree.set("parameters/Attack/BlendSpace2D/blend_position", direction)
 
 
-func _play_animation(name: String, direction: Vector2):
-	if anim_state.get_current_node() != name:
-		anim_state.travel(name)
-	_update_blend_position(direction)
+func _play_animation(anim_name: String, direction: Vector2):
+	if direction != Vector2.ZERO:
+		last_direction = direction
+	if anim_state.get_current_node() != anim_name:
+		anim_state.travel(anim_name)
+	_update_blend_position(last_direction)
+	
+func _on_chase_area_entered(body):
+	if body == player:
+		state = SlimeState.CHASE
+
+func _on_chase_area_exited(body):
+	if body == player:
+		state = SlimeState.WALK
+		
+func _on_attack_cooldown_timeout():
+	can_attack = true
+	
+func _on_attack_area_entered(body):
+	if body.name == "Player" and can_attack and state == SlimeState.CHASE:
+		state = SlimeState.ATTACK
+		can_attack = false
+		_play_animation("Attack", last_direction)
+		
+		# Charge dans la direction pendant l'attaque
+		velocity = last_direction * SPEED * 1.5  # ou un autre facteur de charge
+		move_and_slide()
+
+		# cooldown relancé, retour à chase géré par AnimationTree
+		attack_cooldown_timer.start()
