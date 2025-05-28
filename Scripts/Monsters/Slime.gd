@@ -27,21 +27,16 @@ func _ready():
 	area_chase.connect("body_entered", Callable(self, "_on_chase_area_entered"))
 	area_chase.connect("body_exited", Callable(self, "_on_chase_area_exited"))
 	area_attack.connect("body_entered", Callable(self, "_on_attack_area_entered"))
+	area_attack.connect("body_exited", Callable(self, "_on_attack_area_exited"))
 	anim_tree.active = true
 	walk_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	walk_timer = WALK_CHANGE_INTERVAL
 	idle_timer = 0
-	
-	attack_cooldown_timer = Timer.new()
-	attack_cooldown_timer.wait_time = ATTACK_COOLDOWN
-	attack_cooldown_timer.one_shot = true
-	attack_cooldown_timer.connect("timeout", Callable(self, "_on_attack_cooldown_timeout"))
-	add_child(attack_cooldown_timer)
 
 
 func _physics_process(delta):
 	
-	# print("Slime state:", state) #futur debug tu connais
+	print("Slime state:", state) #futur debug tu connais
 	
 	match state:
 		SlimeState.WALK:
@@ -69,6 +64,9 @@ func _physics_process(delta):
 			velocity = direction * SPEED
 			move_and_slide()
 			_play_animation("Chase", direction)
+			
+		SlimeState.ATTACK:
+			print("attaque")
 
 
 func _update_blend_position(direction: Vector2):
@@ -92,18 +90,11 @@ func _on_chase_area_exited(body):
 	if body == player:
 		state = SlimeState.WALK
 		
-func _on_attack_cooldown_timeout():
-	can_attack = true
-	
 func _on_attack_area_entered(body):
-	if body.name == "Player" and can_attack and state == SlimeState.CHASE:
+	if body == player:
 		state = SlimeState.ATTACK
-		can_attack = false
-		_play_animation("Attack", last_direction)
-		
-		# Charge dans la direction pendant l'attaque
-		velocity = last_direction * SPEED * 1.5  # ou un autre facteur de charge
-		move_and_slide()
 
-		# cooldown relancé, retour à chase géré par AnimationTree
-		attack_cooldown_timer.start()
+func _on_attack_area_exited(body):
+	if body == player:
+		state = SlimeState.CHASE
+		
