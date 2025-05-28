@@ -1462,3 +1462,5 @@ shape = SubResource("CircleShape2D_8xt7h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAttack"]
 position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_g0m0r")
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

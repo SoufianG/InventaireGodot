@@ -22,6 +22,7 @@ const IDLE_MAX = 3.0
 var last_direction = Vector2.DOWN  # c'est pour qu'il garde sa direction fixe apres avoir bougé
 var attack_cooldown_timer: Timer
 
+var attacking:bool = false
 
 func _ready():
 	area_chase.connect("body_entered", Callable(self, "_on_chase_area_entered"))
@@ -67,6 +68,10 @@ func _physics_process(delta):
 			
 		SlimeState.ATTACK:
 			print("attaque")
+			velocity = last_direction * (1.5 * SPEED)
+			anim_tree.get("parameters/playback").travel("Attack")
+			#move_and_slide()
+			_play_animation("Attack", last_direction) 
 
 
 func _update_blend_position(direction: Vector2):
@@ -96,5 +101,14 @@ func _on_attack_area_entered(body):
 
 func _on_attack_area_exited(body):
 	if body == player:
+		pass
+		#state = SlimeState.CHASE
+		
+
+
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if "attack" in anim_name:
+		attacking = false
 		state = SlimeState.CHASE
 		
