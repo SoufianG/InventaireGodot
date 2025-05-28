@@ -111,4 +111,5 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if "attack" in anim_name:
 		attacking = false
 		state = SlimeState.CHASE
+		print("fin attaque")
 		

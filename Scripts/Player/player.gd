@@ -41,6 +41,7 @@ func _physics_process(delta):
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if "attack" in anim_name:
+		print("fin attaque")
 		attacking = false
 		
 func hit(damage):
