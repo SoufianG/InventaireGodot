@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvrwv8wt258vd"]
+
+[ext_resource type="Script" uid="uid://coja2ave4t402" path="res://Scripts/Healthbar/simple_healthbar.gd" id="1_avqfg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5odsc"]
+bg_color = Color(0.27723, 0.699287, 0.390845, 1)
+
+[node name="SimpleHealthbar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 4.0
+offset_bottom = 27.0
+script = ExtResource("1_avqfg")
+
+[node name="Bar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 5.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_5odsc")
+value = 50.0
+show_percentage = false

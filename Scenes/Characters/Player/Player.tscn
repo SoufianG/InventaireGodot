@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://byxcsxj15yy77"]
+[gd_scene load_steps=123 format=3 uid="uid://byxcsxj15yy77"]
 
 [ext_resource type="Script" uid="uid://d0qplx1sqr3d1" path="res://Scripts/Player/player.gd" id="1_10f73"]
 [ext_resource type="Texture2D" uid="uid://m36rx6jjeri2" path="res://Assets/Sprites/Characters/player-2.png" id="2_ihu26"]
@@ -1020,6 +1020,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x6drk"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ajgou"]
+graph_offset = Vector2(-260.368, -86.4526)
 nodes/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_so6o7")
 nodes/BlendSpace2D/position = Vector2(400, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_x6drk")
@@ -1061,6 +1062,7 @@ nodes/output/position = Vector2(820, 120)
 node_connections = [&"TimeScale", 0, &"BlendSpace2D", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w5e4k"]
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d6ksq"]
 
@@ -1095,18 +1097,22 @@ states/Walk/position = Vector2(383, 285)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_w5e4k"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_d6ksq"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_q435t"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_lumsl"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_begrn"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_qdudg"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_4qtfr"), "Walk", "Death", SubResource("AnimationNodeStateMachineTransition_e5vdc"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_gd6ug"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_4880i")]
 graph_offset = Vector2(0, 41.4433)
 
-[node name="Player2" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y2kw"]
+size = Vector2(11.2, 10.8)
+
+[node name="Player" type="CharacterBody2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_10f73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.2, 4)
 shape = SubResource("CircleShape2D_ihu26")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -8)
 sprite_frames = SubResource("SpriteFrames_ax721")
-animation = &""
+animation = &"idle_front"
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1120,9 +1126,16 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/BlendSpace2D/blend_position = Vector2(-0.199772, 0.326733)
 parameters/Attack/TimeScale/scale = 0.35
 parameters/Death/TimeScale/scale = 0.35
-parameters/Idle/BlendSpace2D/blend_position = Vector2(0.0324416, -0.0891089)
+parameters/Idle/BlendSpace2D/blend_position = Vector2(-0.00626069, 0.384615)
 parameters/Idle/TimeScale/scale = 0.2
 parameters/Walk/BlendSpace2D/blend_position = Vector2(0.0722823, -0.392739)
 parameters/Walk/TimeScale/scale = 0.35
+
+[node name="attack_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+position = Vector2(-0.2, 4.2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8y2kw")
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

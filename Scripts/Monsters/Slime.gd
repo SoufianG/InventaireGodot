@@ -5,11 +5,14 @@ extends CharacterBody2D
 @onready var player = get_node("/root/World/Player")  
 @onready var area_chase = $AreaChase
 @onready var area_attack = $AreaAttack
+@onready var healthbar = $SimpleHealthbar
 
-const SPEED = 80
-const ATTACK_COOLDOWN = 3.0
-var can_attack = true
-var is_dead = false
+
+
+const SPEED: int = 120
+
+
+var is_dead: bool = false
 enum SlimeState {IDLE, WALK, CHASE, ATTACK, DAMAGED, DEATH }
 var state = SlimeState.WALK
 var walk_direction = Vector2.ZERO
@@ -22,9 +25,21 @@ const IDLE_MAX = 3.0
 var last_direction = Vector2.DOWN  # c'est pour qu'il garde sa direction fixe apres avoir bougé
 var attack_cooldown_timer: Timer
 
-var attacking:bool = false
+const ATTACK_COOLDOWN = 3.0
+var can_attack:bool = true
+
+var recovery_timer: Timer
+
+var previous_state: int = SlimeState.IDLE
+var health: int = 200
+var current_health = 200
+
 
 func _ready():
+	
+	
+		
+	
 	area_chase.connect("body_entered", Callable(self, "_on_chase_area_entered"))
 	area_chase.connect("body_exited", Callable(self, "_on_chase_area_exited"))
 	area_attack.connect("body_entered", Callable(self, "_on_attack_area_entered"))
@@ -34,10 +49,22 @@ func _ready():
 	walk_timer = WALK_CHANGE_INTERVAL
 	idle_timer = 0
 
-
+	attack_cooldown_timer = Timer.new()
+	attack_cooldown_timer.wait_time = ATTACK_COOLDOWN
+	attack_cooldown_timer.one_shot = true
+	attack_cooldown_timer.connect("timeout", Callable(self, "_on_attack_cooldown_timeout"))
+	add_child(attack_cooldown_timer)
+	
+	recovery_timer = Timer.new()
+	recovery_timer.wait_time = 1.0
+	recovery_timer.one_shot = true
+	recovery_timer.connect("timeout", Callable(self, "_on_recovery_timeout"))
+	add_child(recovery_timer)
+	
 func _physics_process(delta):
 	
-	print("Slime state:", state) #futur debug tu connais
+	#print("Slime state:", state) #futur debug tu connais
+	#print(last_direction)
 	
 	match state:
 		SlimeState.WALK:
@@ -67,11 +94,12 @@ func _physics_process(delta):
 			_play_animation("Chase", direction)
 			
 		SlimeState.ATTACK:
-			print("attaque")
 			velocity = last_direction * (1.5 * SPEED)
-			anim_tree.get("parameters/playback").travel("Attack")
-			#move_and_slide()
-			_play_animation("Attack", last_direction) 
+			move_and_slide()
+			_play_animation("Attack", last_direction)
+			
+		SlimeState.DAMAGED:
+			velocity = last_direction * -10
 
 
 func _update_blend_position(direction: Vector2):
@@ -96,8 +124,13 @@ func _on_chase_area_exited(body):
 		state = SlimeState.WALK
 		
 func _on_attack_area_entered(body):
-	if body == player:
+	if body == player and can_attack:
 		state = SlimeState.ATTACK
+		can_attack = false  # bloque les prochaines attaques
+		attack_cooldown_timer.start()
+		if body.has_method("take_damage"):
+			body.take_damage(50)
+		
 
 func _on_attack_area_exited(body):
 	if body == player:
@@ -105,11 +138,40 @@ func _on_attack_area_exited(body):
 		#state = SlimeState.CHASE
 		
 
-
-
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if "attack" in anim_name:
-		attacking = false
-		state = SlimeState.CHASE
+		can_attack = false
 		print("fin attaque")
+		# attaque unique → on retourne en CHASE immédiatement après
+		#state = SlimeState.CHASE
+		recovery_timer.start()
+		state = SlimeState.IDLE
 		
+	elif "damaged" in anim_name:
+		state = previous_state		
+		
+func _on_recovery_timeout():
+	state = SlimeState.CHASE
+	can_attack = true
+		
+func _on_attack_cooldown_timeout():
+	can_attack = true
+
+func take_damage(damage: int):
+	health -= damage
+	print("slime health :", health)
+
+	if health <= 0 and !is_dead:
+		is_dead = true
+		state = SlimeState.DEATH
+		anim_state.travel("Death")
+		await anim_tree.animation_finished
+		queue_free()
+	else:
+		if !is_dead:
+			previous_state = state
+			state = SlimeState.DAMAGED
+			velocity = last_direction * -10
+			anim_state.travel("Damaged")
+			healthbar.set_health(current_health)
+			
