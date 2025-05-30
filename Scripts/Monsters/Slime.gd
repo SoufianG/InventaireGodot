@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var player = get_node("/root/World/Player")  
 @onready var area_chase = $AreaChase
 @onready var area_attack = $AreaAttack
-@onready var healthbar = $SimpleHealthbar
+@onready var healthbar = $Healthbar  # updated to new Healthbar node name
 
 
 
@@ -31,8 +31,8 @@ var can_attack:bool = true
 var recovery_timer: Timer
 
 var previous_state: int = SlimeState.IDLE
-var health: int = 200
-var current_health = 200
+var health: int = 100
+var current_health = 100
 
 
 func _ready():
@@ -61,10 +61,13 @@ func _ready():
 	recovery_timer.connect("timeout", Callable(self, "_on_recovery_timeout"))
 	add_child(recovery_timer)
 	
+	# Initialize health bar to full health
+	healthbar.init_health(health)  # initialize max and damage bar correctly
+	
 func _physics_process(delta):
 	
 	#print("Slime state:", state) #futur debug tu connais
-	#print(last_direction)
+	#print(last_direction) 
 	
 	match state:
 		SlimeState.WALK:
@@ -158,20 +161,23 @@ func _on_attack_cooldown_timeout():
 	can_attack = true
 
 func take_damage(damage: int):
+	if is_dead:
+		return
 	health -= damage
+	if health < 0:
+		health = 0
 	print("slime health :", health)
+	healthbar.set_health(health)
 
-	if health <= 0 and !is_dead:
+	if health <= 0:
 		is_dead = true
 		state = SlimeState.DEATH
 		anim_state.travel("Death")
 		await anim_tree.animation_finished
 		queue_free()
-	else:
-		if !is_dead:
-			previous_state = state
-			state = SlimeState.DAMAGED
-			velocity = last_direction * -10
-			anim_state.travel("Damaged")
-			healthbar.set_health(current_health)
-			
+		return
+	# non-lethal damage: enter damaged state
+	previous_state = state
+	state = SlimeState.DAMAGED
+	velocity = last_direction * -10
+	anim_state.travel("Damaged")

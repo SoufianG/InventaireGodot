@@ -66,7 +66,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 func _on_attack_area_body_entered(body):
 	if body.has_method("take_damage") and attacking:
 		print("tac")
-		body.take_damage(100) #degat arbitraire bg, faudrait faire une formule ici
+		body.take_damage(20) #degat arbitraire bg, faudrait faire une formule ici
 		
 		
 func take_damage(damage: int):
