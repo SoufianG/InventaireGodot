@@ -1,6 +1,6 @@
 [gd_scene load_steps=158 format=3 uid="uid://fcdvakxo2ai1"]
 
-[ext_resource type="Script" uid="uid://du4gugo0kgqj" path="res://Scripts/Monsters/slime.gd" id="1_78cs8"]
+[ext_resource type="Script" uid="uid://du4gugo0kgqj" path="res://Scripts/Monsters/Slime.gd" id="1_78cs8"]
 [ext_resource type="Texture2D" uid="uid://drphr4b1q2rhi" path="res://Assets/Sprites/Characters/slime-2.png" id="1_idtdq"]
 [ext_resource type="PackedScene" uid="uid://vhw1056sp7lg" path="res://Scenes/HealthBar/healthbar.tscn" id="3_4f4ob"]
 
@@ -1405,7 +1405,7 @@ states/Start/position = Vector2(501, 265)
 states/Walk/node = SubResource("AnimationNodeBlendTree_gp7v6")
 states/Walk/position = Vector2(675, 150)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_23se4"), "Walk", "Chase", SubResource("AnimationNodeStateMachineTransition_ab2k6"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_n8mr6"), "Walk", "Damaged", SubResource("AnimationNodeStateMachineTransition_p3a8s"), "Damaged", "Death", SubResource("AnimationNodeStateMachineTransition_5gq7t"), "Chase", "Walk", SubResource("AnimationNodeStateMachineTransition_ikgif"), "Chase", "Attack", SubResource("AnimationNodeStateMachineTransition_b6u4a"), "Attack", "Chase", SubResource("AnimationNodeStateMachineTransition_rt716"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_lqylm"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_ev7ag"), "Damaged", "Walk", SubResource("AnimationNodeStateMachineTransition_6dryp"), "Damaged", "Attack", SubResource("AnimationNodeStateMachineTransition_eq55l"), "Chase", "Damaged", SubResource("AnimationNodeStateMachineTransition_mvqa4"), "Damaged", "Chase", SubResource("AnimationNodeStateMachineTransition_hxkrm")]
-graph_offset = Vector2(181.311, 32.458)
+graph_offset = Vector2(296.311, 305.458)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8xt7h"]
 radius = 286.252
@@ -1459,10 +1459,10 @@ shape = SubResource("CircleShape2D_g0m0r")
 debug_color = Color(0.806615, 0.00231201, 0.993399, 0.42)
 
 [node name="Healthbar" parent="." instance=ExtResource("3_4f4ob")]
-visible = false
 offset_left = -37.0
 offset_top = -41.0
 offset_right = 37.0
 offset_bottom = -37.0
+max_value = 120.0
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

@@ -11,7 +11,8 @@ var health:int = 1000
 var last_direction := Vector2.DOWN
 
 func _ready():
-	attack_area.connect("body_entered", Callable(self, "_on_attack_area_body_entered"))
+	# using manual collision check in start_attack, no signal needed
+	pass
 
 
 func _physics_process(delta):
@@ -42,16 +43,24 @@ func _physics_process(delta):
 		#print(health)
 		move_and_slide()
 		
-func start_attack():
+func start_attack() -> void:
 	attacking = true
-	print (last_direction)
-
-	var offset = Vector2()
-	offset = last_direction * 14
-	attack_area.position = offset
+	print("start_attack: last_direction=", last_direction)
+	# Position and enable attack area
+	attack_area.position = last_direction * 14
 	attack_area.monitoring = true
-	print("fin attaque")
-
+	print("attack_area enabled at pos=", attack_area.global_position)
+	# Wait one physics frame to register overlaps
+	await get_tree().physics_frame
+	# Check overlapping bodies
+	var bodies = attack_area.get_overlapping_bodies()
+	print("start_attack overlaps count=", bodies.size())
+	for body in bodies:
+		print("  candidate =", body.name)
+		if body.has_method("take_damage"):
+			print("  applying damage to", body.name)
+			body.take_damage(20)
+	# Trigger attack animation
 	anim_tree.get("parameters/playback").travel("Attack")
 
 func end_attack():
@@ -62,12 +71,6 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if "attack" in anim_name:
 		
 		end_attack()
-		
-func _on_attack_area_body_entered(body):
-	if body.has_method("take_damage") and attacking:
-		print("tac")
-		body.take_damage(20) #degat arbitraire bg, faudrait faire une formule ici
-		
 		
 func take_damage(damage: int):
 	health -= damage

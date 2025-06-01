@@ -24,10 +24,12 @@ func _set_health(new_health):
 
 
 func init_health(_health):
+	# Set maximum before assigning health so setter clamps correctly
+	max_value = _health
+	damage_bar.max_value = _health
+	# Assign health via setter now that max_value is correct
 	health = _health
-	max_value = health
 	value = health
-	damage_bar.max_value = health
 	damage_bar.value = health
 	
 	
@@ -37,3 +39,11 @@ func _on_timer_timeout() -> void:
 
 func set_health(new_health: int):
 	health = new_health
+
+func _ready() -> void:
+	# Auto-configure max_value and initial current value from parent node's health
+	var parent_node = get_parent()
+	if parent_node and parent_node.has("health"):
+		init_health(parent_node.health)
+	else:
+		print("Healthbar: cannot read parent health to initialize")

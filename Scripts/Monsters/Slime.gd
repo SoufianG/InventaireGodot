@@ -31,8 +31,8 @@ var can_attack:bool = true
 var recovery_timer: Timer
 
 var previous_state: int = SlimeState.IDLE
-var health: int = 100
-var current_health = 100
+var health: int = 120
+var current_health = 120
 
 
 func _ready():
@@ -163,6 +163,9 @@ func _on_attack_cooldown_timeout():
 func take_damage(damage: int):
 	if is_dead:
 		return
+	# Prevent further damage while in damaged state
+	if state == SlimeState.DAMAGED:
+		return
 	health -= damage
 	if health < 0:
 		health = 0
@@ -177,7 +180,8 @@ func take_damage(damage: int):
 		queue_free()
 		return
 	# non-lethal damage: enter damaged state
-	previous_state = state
+	if state != SlimeState.DAMAGED:
+		previous_state = state
 	state = SlimeState.DAMAGED
 	velocity = last_direction * -10
 	anim_state.travel("Damaged")
