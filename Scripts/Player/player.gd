@@ -8,6 +8,8 @@ const speed:int = 120
 var attacking:bool = false
 var dying:bool = false
 var health:int = 300
+#var health_max: int = 300
+var regen: int = 1
 
 var last_direction := Vector2.DOWN
 
@@ -16,6 +18,15 @@ func _ready():
 
 
 func _physics_process(delta):
+	
+	#while health < health_max:
+		#health += regen
+		#if health > health_max:
+			#health = health_max
+		#print(health)
+	
+	
+	
 	if Input.is_action_just_pressed("ui_accept") and not attacking and not dying:
 		start_attack()
 		return

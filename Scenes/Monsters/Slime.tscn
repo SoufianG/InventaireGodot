@@ -38,6 +38,7 @@ var recovery_timer: Timer
 
 var previous_state: int = SlimeState.IDLE
 var health: int = 120
+var force: int = 25
 
 
 func _ready():
@@ -137,7 +138,7 @@ func _on_attack_area_entered(body):
 		can_attack = false  # bloque les prochaines attaques
 		attack_cooldown_timer.start()
 		if body.has_method(\"take_damage\"):
-			body.take_damage(50)
+			body.take_damage(force)
 		
 
 func _on_attack_area_exited(body):
