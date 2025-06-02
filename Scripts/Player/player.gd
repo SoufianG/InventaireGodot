@@ -2,17 +2,17 @@ extends CharacterBody2D
 
 @onready var anim_tree = get_node("AnimationTree")
 @onready var attack_area = $attack_area
+@onready var healthbar = $Healthbar
 
-const speed:int = 200
+const speed:int = 120
 var attacking:bool = false
 var dying:bool = false
-var health:int = 1000
+var health:int = 300
 
 var last_direction := Vector2.DOWN
 
 func _ready():
-	# using manual collision check in start_attack, no signal needed
-	pass
+	healthbar.init_health(health)
 
 
 func _physics_process(delta):
@@ -75,6 +75,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 func take_damage(damage: int):
 	health -= damage
 	print("player health :", health)
+	healthbar.health = health
 	if health <= 0:
 		dying = true
 		anim_tree.get("parameters/playback").travel("Death")

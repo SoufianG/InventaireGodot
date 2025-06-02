@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 
 
-const SPEED: int = 120
+const SPEED: int = 300
 
 
 var is_dead: bool = false
@@ -170,7 +170,7 @@ func take_damage(damage: int):
 	if health < 0:
 		health = 0
 	print("slime health :", health)
-	healthbar.set_health(health)
+
 
 	if health <= 0:
 		is_dead = true

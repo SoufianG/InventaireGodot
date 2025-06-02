@@ -1,7 +1,8 @@
-[gd_scene load_steps=123 format=3 uid="uid://byxcsxj15yy77"]
+[gd_scene load_steps=124 format=3 uid="uid://byxcsxj15yy77"]
 
 [ext_resource type="Script" uid="uid://d0qplx1sqr3d1" path="res://Scripts/Player/player.gd" id="1_10f73"]
 [ext_resource type="Texture2D" uid="uid://m36rx6jjeri2" path="res://Assets/Sprites/Characters/player-2.png" id="2_ihu26"]
+[ext_resource type="PackedScene" uid="uid://vhw1056sp7lg" path="res://Scenes/HealthBar/healthbar.tscn" id="3_gqvyu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ihu26"]
 radius = 5.8
@@ -1105,7 +1106,6 @@ scale = Vector2(5, 5)
 script = ExtResource("1_10f73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0.2, 4)
 shape = SubResource("CircleShape2D_ihu26")
 
@@ -1136,5 +1136,12 @@ parameters/Walk/TimeScale/scale = 0.35
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
 position = Vector2(-0.2, 4.2)
 shape = SubResource("RectangleShape2D_8y2kw")
+
+[node name="Healthbar" parent="." instance=ExtResource("3_gqvyu")]
+offset_left = -8.6
+offset_top = -17.4
+offset_right = 8.4
+offset_bottom = -13.4
+max_value = 300.0
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
