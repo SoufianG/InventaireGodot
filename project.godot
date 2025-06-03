@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="testInventaire"
-run/main_scene="uid://b8kc3akgykqvp"
+run/main_scene="uid://clk1482lvxgmp"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[gui]
+
+theme/custom="uid://cmnugjcs1bp32"
 
 [rendering]
 

@@ -91,4 +91,5 @@ func take_damage(damage: int):
 		dying = true
 		anim_tree.get("parameters/playback").travel("Death")
 		await anim_tree.animation_finished
+		get_tree().change_scene_to_file("res://Scenes/Menu/GameOver.tscn")
 		queue_free()
