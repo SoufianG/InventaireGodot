@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckdqt1sqld82w"]
+
+[ext_resource type="Script" uid="uid://bjixbsve517b0" path="res://Scripts/Systeme/waypoint_2d.gd" id="1_7vaul"]
+
+[node name="Waypoint2D" type="Node2D"]
+script = ExtResource("1_7vaul")

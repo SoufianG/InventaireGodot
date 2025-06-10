@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=4 uid="uid://b8kc3akgykqvp"]
+[gd_scene load_steps=16 format=4 uid="uid://i1hnn8k8pfll"]
 
-[ext_resource type="PackedScene" uid="uid://byxcsxj15yy77" path="res://Scenes/Characters/Player/Player.tscn" id="1_0nbjp"]
-[ext_resource type="Texture2D" uid="uid://jlgdw0dwcpda" path="res://Assets/Sprites/Tileset/plains.png" id="1_5jr8x"]
-[ext_resource type="Texture2D" uid="uid://dhhl4c78gcmvp" path="res://Assets/Sprites/Tileset/grass.png" id="2_27jhl"]
-[ext_resource type="PackedScene" uid="uid://fcdvakxo2ai1" path="res://Scenes/Monsters/Slime.tscn" id="2_xf6vi"]
-[ext_resource type="Texture2D" uid="uid://bdj8sag5y6wd4" path="res://Assets/Sprites/Objects/objects.png" id="4_hveh7"]
-[ext_resource type="Texture2D" uid="uid://be3o1i3qdpufl" path="res://Assets/Sprites/Objects/chest_01.png" id="5_87yka"]
+[ext_resource type="PackedScene" uid="uid://byxcsxj15yy77" path="res://Scenes/Characters/Player/Player.tscn" id="1_4gsti"]
+[ext_resource type="Script" uid="uid://c6oeb70yy6q0b" path="res://Scripts/World/Map1/map_1.gd" id="1_xthfh"]
+[ext_resource type="Texture2D" uid="uid://jlgdw0dwcpda" path="res://Assets/Sprites/Tileset/plains.png" id="2_xthfh"]
+[ext_resource type="Texture2D" uid="uid://dhhl4c78gcmvp" path="res://Assets/Sprites/Tileset/grass.png" id="3_qmg6j"]
+[ext_resource type="Texture2D" uid="uid://bdj8sag5y6wd4" path="res://Assets/Sprites/Objects/objects.png" id="4_78q2p"]
+[ext_resource type="Texture2D" uid="uid://be3o1i3qdpufl" path="res://Assets/Sprites/Objects/chest_01.png" id="5_r28c3"]
+[ext_resource type="PackedScene" uid="uid://fcdvakxo2ai1" path="res://Scenes/Monsters/Slime.tscn" id="6_6tohh"]
+[ext_resource type="PackedScene" uid="uid://d1o5oubj6irpr" path="res://Scenes/Props/campfire.tscn" id="7_hydkw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hveh7"]
-texture = ExtResource("1_5jr8x")
+texture = ExtResource("2_xthfh")
 0:0/0 = 0
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -209,12 +211,12 @@ texture = ExtResource("1_5jr8x")
 5:11/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87yka"]
-texture = ExtResource("2_27jhl")
+texture = ExtResource("3_qmg6j")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjd5s"]
-texture = ExtResource("4_hveh7")
+texture = ExtResource("4_78q2p")
 0:0/0 = 0
 0:0/0/y_sort_origin = -2
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 8, 4, 8, 5, 9, 9, 9, 10, 5, 12, 5, 11, 1, 9, -1, -10, -1, -12, 1, -11, 6, -7, 7, -6, 9, -1, 10)
@@ -424,7 +426,7 @@ texture = ExtResource("4_hveh7")
 10:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7pgw"]
-texture = ExtResource("5_87yka")
+texture = ExtResource("5_r28c3")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -442,13 +444,19 @@ sources/1 = SubResource("TileSetAtlasSource_87yka")
 sources/2 = SubResource("TileSetAtlasSource_kjd5s")
 sources/3 = SubResource("TileSetAtlasSource_p7pgw")
 
-[node name="World" type="Node2D"]
-y_sort_enabled = true
+[sub_resource type="GDScript" id="GDScript_4gsti"]
 
-[node name="Player" parent="." instance=ExtResource("1_0nbjp")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87yka"]
+size = Vector2(97, 20)
+
+[node name="Map1" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_xthfh")
+
+[node name="Player" parent="." instance=ExtResource("1_4gsti")]
 z_index = 2
 y_sort_enabled = true
-position = Vector2(884, 191)
+position = Vector2(773, 190)
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -471,6 +479,28 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("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")
 tile_set = SubResource("TileSet_kjd5s")
 
-[node name="Slime" parent="." instance=ExtResource("2_xf6vi")]
+[node name="Slime" parent="." instance=ExtResource("6_6tohh")]
 z_index = 2
-position = Vector2(723, 256)
+position = Vector2(450, 467)
+
+[node name="Campfire" parent="." instance=ExtResource("7_hydkw")]
+position = Vector2(824, 257)
+
+[node name="PasssageMap" type="Area2D" parent="."]
+script = SubResource("GDScript_4gsti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PasssageMap"]
+position = Vector2(353, -86)
+shape = SubResource("RectangleShape2D_87yka")
+debug_color = Color(0.903517, 0.28714, 0.289163, 0.42)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="spawn_from_map2" type="Node2D" parent="Node"]
+position = Vector2(351, -38)
+
+[node name="Campfire2" parent="." instance=ExtResource("7_hydkw")]
+spawn_point_name = "spawn_fire_2"
+campfire_id = "campfire_2"
+
+[connection signal="body_entered" from="PasssageMap" to="." method="_on_passsage_map_body_entered"]

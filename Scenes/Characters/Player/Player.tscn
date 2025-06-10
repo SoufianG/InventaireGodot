@@ -1101,7 +1101,7 @@ graph_offset = Vector2(0, 41.4433)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8y2kw"]
 size = Vector2(11.2, 10.8)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(5, 5)
 script = ExtResource("1_10f73")
 

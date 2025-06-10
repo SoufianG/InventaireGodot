@@ -11,9 +11,20 @@ config_version=5
 [application]
 
 config/name="testInventaire"
-run/main_scene="uid://clk1482lvxgmp"
+run/main_scene="uid://i1hnn8k8pfll"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://Scripts/Autoload/GameManager.gd"
+PlayerManager="*res://Scripts/Autoload/PlayerManager.gd"
+
+[global_group]
+
+Player=""
+Monstre=""
+Campfire=""
 
 [gui]
 
