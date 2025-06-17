@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Equipement" load_steps=3 format=3 uid="uid://cpycq45uc4sv8"]
+
+[ext_resource type="Script" uid="uid://c58iqy45rn5" path="res://Scripts/Items/Equipement.gd" id="1_g28n5"]
+[ext_resource type="Texture2D" uid="uid://c1gkxh01hvpns" path="res://Assets/Sprites/Items/equipment/EpeeRouille.png" id="1_ou61v"]
+
+[resource]
+script = ExtResource("1_g28n5")
+slot = "Arme"
+perfection = 50
+stats = {}
+stats_theorique = {
+"force": Vector2(3, 15),
+"hp": Vector2(10, 30)
+}
+niveau = 1
+name = "Epée en fer"
+description = "Une épée basique en métal brut."
+rank = "D"
+stackable = false
+item_type = "Equipement"
+loot_rate = 1.0
+icon = ExtResource("1_ou61v")
+metadata/_custom_type_script = "uid://c58iqy45rn5"

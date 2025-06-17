@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-@export var spawn_point_name := "spawn_fire_1" #a modifier depuis l'inspecteur
-@export var campfire_id := "campfire_1"  # Un identifiant unique pour chaque feu
+@export var spawn_point_name := "" #a modifier depuis l'inspecteur
+@export var campfire_id := ""  # Un identifiant unique pour chaque feu
 
 var player_in_range = false
 var player_ref : Node = null
@@ -16,10 +16,11 @@ func _ready():
 		is_lit = true
 		play_anim("Lit")
 		$PointLight2D.visible = true
+	else:
+		$PointLight2D.visible = false
+		$InteractionLabel.visible = false
 	
 	# Cache l’indicateur d’interaction
-	$InteractionLabel.visible = false
-	$PointLight2D.visible = false
 	
 	# Connecte les signaux
 	$Detector.connect("body_entered", Callable(self, "_on_body_entered"))
