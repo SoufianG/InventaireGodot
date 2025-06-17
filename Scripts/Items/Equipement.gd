@@ -70,69 +70,7 @@ func get_poids() -> int:
 		stats[s["name"]] = int(round(final_value))
 		print("✅ Stat finale :%s=%d" % [s["name"], stats[s["name"]]])
 
-func generer_stats_depuis_perfection2():
-	stats.clear()
 
-	var poids_min: float = 0.0
-	var poids_max: float = 0.0
-	var stat_data: Array = []
-
-	var stats_theorique_locale := {}
-
-	for k in stats_theorique.keys():
-		var v = stats_theorique[k]
-		stats_theorique_locale[k] = Vector2(v.x, v.y)
-	
-	print("DEBUG - stats_theorique =", stats_theorique)
-	print("🔎 Copie locale stats_theorique :", stats_theorique_locale)
-	print("🔍 Même référence ? ", stats_theorique == stats_theorique_locale)
-	
-	for stat_name in stats_theorique_locale.keys():
-		var vect: Vector2 = stats_theorique_locale[stat_name]
-		#var vect: Vector2 = stats_theorique[stat_name]
-		var min_val: float = vect.x
-		var max_val: float = vect.y
-		var poids_stat: float = StatWeightsManager.get_stat_weight(stat_name)
-
-		poids_min += min_val * poids_stat
-		poids_max += max_val * poids_stat
-
-		stat_data.append({
-			"name": stat_name,
-			"min": min_val,
-			"max": max_val,
-			"poids": poids_stat,
-			"val": min_val
-		})
-
-	var poids_cible: float = poids_min + (perfection / 100.0) * (poids_max - poids_min)
-	var poids_restant: float = poids_cible - poids_min
-
-	print("→ Poids min : %.1f | poids max : %.1f | poids cible : %.1f | perfection : %d" % [poids_min, poids_max, poids_cible, perfection])
-
-	while poids_restant > 0.01 and stat_data.size() > 0:
-		var index: int = randi() % stat_data.size()
-		var step: float = 0.1
-		var s: Dictionary = stat_data[index]
-		var increment_cost: float = s["poids"] * step
-		var new_val: float = s["val"] + step
-
-		if poids_restant >= increment_cost and new_val <= s["max"]:
-			# 💥 Modifier directement la valeur dans la liste :
-			stat_data[index]["val"] = new_val
-			poids_restant -= increment_cost
-			print("  → Allocation à %s +%.1f (val = %.1f)" % [s["name"], step, new_val])
-		else:
-			stat_data.remove_at(index)
-
-# Étape 4 : application finale (arrondi si besoin)
-	for s in stat_data:
-		var min_val: float = s["min"]
-		var max_val: float = s["max"]
-		var current_val: float = s["val"]
-		var final_value: float = clamp(current_val, min_val, max_val)
-		stats[s["name"]] = int(round(final_value))
-		print("✅ Stat finale :%s = %d" % [s["name"], stats[s["name"]]])
 
 func generer_stats_depuis_perfection():
 	stats.clear()
@@ -173,25 +111,28 @@ func generer_stats_depuis_perfection():
 
 	print("→ Poids min : %.1f | poids max : %.1f | poids cible : %.1f | perfection : %d" % [poids_min, poids_max, poids_cible, perfection])
 
-	while poids_restant > 0.01 and stat_data.size() > 0:
-		var index: int = randi() % stat_data.size()
-		var step: float = 0.1
-		var s: Dictionary = stat_data[index]
-		var increment_cost: float = s["poids"] * step
-		var new_val: float = s["val"] + step
+	while poids_restant > 0.01:
+		var disponibles := stat_data.filter(func(s):
+			return s["val"] < s["max"] and s["poids"] * 0.1 <= poids_restant
+		)
 
-		if poids_restant >= increment_cost and new_val <= s["max"]:
-			stat_data[index]["val"] = new_val
-			poids_restant -= increment_cost
-			print("  → Allocation à %s +%.1f (val = %.1f)" % [s["name"], step, new_val])
-		else:
-			stat_data.remove_at(index)
+		if disponibles.size() == 0:
+			break  # Plus rien à allouer
 
+		var index := randi() % disponibles.size()
+		var s :Dictionary= disponibles[index]
+		var step := 0.1
+		var increment_cost :float= s["poids"] * step
+		var new_val :float= s["val"] + step
+
+		var real_index := stat_data.find(s)
+		stat_data[real_index]["val"] = new_val
+		poids_restant -= increment_cost
+		print("  → Allocation à %s +%.1f (val = %.1f)" % [s["name"], step, new_val])
+
+	# Étape 4 : application finale
 	for s in stat_data:
-		var min_val: float = s["min"]
-		var max_val: float = s["max"]
-		var current_val: float = s["val"]
-		var final_value: float = clamp(current_val, min_val, max_val)
+		var final_value: float = clamp(s["val"], s["min"], s["max"])
 		stats[s["name"]] = int(round(final_value))
 		print("✅ Stat finale :%s = %d" % [s["name"], stats[s["name"]]])
 
