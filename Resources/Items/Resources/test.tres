@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ResourceItem" load_steps=4 format=3 uid="uid://ci4fhiwlh0kpy"]
+
+[ext_resource type="Script" uid="uid://cbrd664i4346p" path="res://Scripts/Items/Ressource.gd" id="1_f7fxa"]
+[ext_resource type="Texture2D" uid="uid://ck7wpjl178333" path="res://Assets/Sprites/Items/resources/res_bois.png" id="1_udusu"]
+[ext_resource type="Texture2D" uid="uid://dypyb4mt3iogo" path="res://Assets/Sprites/Items/resources/res_bois_bg.png" id="2_v1epb"]
+
+[resource]
+script = ExtResource("1_f7fxa")
+used_in_recipes = Array[String]([])
+name = "Test"
+description = "un petit test?"
+rank = "D"
+stackable = false
+item_type = "Ressource"
+loot_rate = 1.0
+icon = ExtResource("1_udusu")
+inventory_icon = ExtResource("2_v1epb")
+metadata/_custom_type_script = "uid://cbrd664i4346p"

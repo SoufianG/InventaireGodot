@@ -8,7 +8,7 @@ extends Node
 
 func _ready():
 	player_root.add_child(player)
-	change_map("res://Scenes/World/Map1.tscn", "StartPosition", Color.BLACK)
+	change_map("res://Scenes/World/Map2.tscn", "StartPosition", Color.BLACK)
 
 func change_map(scene_path: String, target_spawn_node: NodePath, fade_color: Color):
 	fade_rect.color = fade_color

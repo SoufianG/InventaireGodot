@@ -4,7 +4,7 @@ class_name LootManager  # ← OK, on garde ce nom pour la classe
 # Génère une perfection entre 1 et 100 selon une loi normale centrée
 func generate_perfection(mean: float = 50.0, std_dev: float = 15.0) -> int:
 	var value: float = clamp(randfn(mean, std_dev), 1.0, 100.0)
-	value = 100 #pour forcer la perfection
+	#value = 85 #pour forcer la perfection
 	return int(round(value))
 
 # Duplique un équipement, génère perfection et stats

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Equipement" load_steps=4 format=3 uid="uid://cyhfpo1btv05x"]
+
+[ext_resource type="Script" uid="uid://c58iqy45rn5" path="res://Scripts/Items/Equipement.gd" id="1_68kaq"]
+[ext_resource type="Texture2D" uid="uid://bh0eqim8vf572" path="res://Assets/Sprites/Items/resources/res_chestplate.png" id="1_ic3fg"]
+[ext_resource type="Texture2D" uid="uid://dyx6rwxdkaxo8" path="res://Assets/Sprites/Items/resources/res_chestplate_bg.png" id="2_v4pow"]
+
+[resource]
+script = ExtResource("1_68kaq")
+slot = "Torse"
+perfection = 50
+stats = {}
+stats_theorique = {
+"defense": Vector2(1, 100),
+"hp": Vector2(1, 500)
+}
+niveau = 1
+name = "RandomChestPlate"
+description = "Un torse pour tanker; normalement ?"
+rank = "B"
+stackable = false
+item_type = "Ressource"
+loot_rate = 1.0
+icon = ExtResource("1_ic3fg")
+inventory_icon = ExtResource("2_v4pow")
+metadata/_custom_type_script = "uid://c58iqy45rn5"

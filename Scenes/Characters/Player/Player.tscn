@@ -1146,8 +1146,7 @@ offset_bottom = -13.4
 max_value = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
-position_smoothing_enabled = true
+zoom = Vector2(4, 4)
 position_smoothing_speed = 10.0
 script = ExtResource("4_uapsp")
 

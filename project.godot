@@ -21,6 +21,12 @@ GameManager="*res://Scripts/Autoload/GameManager.gd"
 PlayerManager="*res://Scripts/Autoload/PlayerManager.gd"
 StatWeightsManager="*res://Scripts/Autoload/StatWeightsManager.gd"
 LootSystem="*res://Scripts/Autoload/LootSystem.gd"
+InventaireScript="*res://Scripts/Autoload/Inventaire.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [global_group]
 
@@ -31,6 +37,7 @@ Campfire=""
 [gui]
 
 theme/custom="uid://cmnugjcs1bp32"
+theme/custom_font="uid://dxgy4kvwea35l"
 
 [input]
 

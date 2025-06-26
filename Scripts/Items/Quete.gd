@@ -1,6 +1,6 @@
-@icon("res://Assets/Sprites/UI/Icons/Items/quest_icon.png")
+#@icon("res://Assets/Sprites/UI/Icons/Items/quest_icon.png")
 # Scripts/Items/QuestItem.gd
-extends "res://Scripts/Items/Item.gd"
+extends Item
 class_name QuestItem
 
 @export var quest_name: String

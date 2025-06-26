@@ -1,0 +1,151 @@
+[gd_scene load_steps=13 format=3 uid="uid://bc6d1tirxho5i"]
+
+[ext_resource type="Script" uid="uid://x2dgeucl5uk8" path="res://Scripts/Menu/inventaire_ui.gd" id="1_eq28m"]
+[ext_resource type="Texture2D" uid="uid://cfhxn1ilelpe6" path="res://Assets/Sprites/UI/Ui_fond.png" id="1_xmmgf"]
+[ext_resource type="Texture2D" uid="uid://do8eunhfxtqyq" path="res://Assets/Sprites/UI/casque_fond.png" id="2_qn87y"]
+[ext_resource type="Texture2D" uid="uid://yx87rrshp0pf" path="res://Assets/Sprites/UI/amulette_fond.png" id="3_eq28m"]
+[ext_resource type="Texture2D" uid="uid://cfxueyukxut0n" path="res://Assets/Sprites/UI/torse_fond.png" id="4_ggwy5"]
+[ext_resource type="Texture2D" uid="uid://d2qqbv6fx2a6u" path="res://Assets/Sprites/UI/pantalon_fond.png" id="5_44ldx"]
+[ext_resource type="Texture2D" uid="uid://du0iiw654r4gu" path="res://Assets/Sprites/UI/ceinture_fond.png" id="6_tsc3i"]
+[ext_resource type="Texture2D" uid="uid://bvxkgg8vkv2gp" path="res://Assets/Sprites/UI/bottes_fond.png" id="7_lrxem"]
+[ext_resource type="Texture2D" uid="uid://bj6oqli1mmsh2" path="res://Assets/Sprites/UI/anneau_droit_fond.png" id="8_ewg8x"]
+[ext_resource type="Texture2D" uid="uid://by1bwcnqq401a" path="res://Assets/Sprites/UI/anneau_gauche_fond.png" id="9_qmldd"]
+[ext_resource type="Texture2D" uid="uid://dk7wng48vqqn4" path="res://Assets/Sprites/UI/arme_droite_fond.png" id="10_lrwmn"]
+[ext_resource type="Texture2D" uid="uid://bx20gfq4ka0d3" path="res://Assets/Sprites/UI/arme_gauche_fond.png" id="11_a8yj5"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 784.0
+offset_bottom = 360.0
+script = ExtResource("1_eq28m")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 788.0
+offset_bottom = 360.0
+texture = ExtResource("1_xmmgf")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 773.0
+offset_bottom = 357.0
+
+[node name="EquipementJoueur" type="VBoxContainer" parent="NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer/EquipementJoueur"]
+layout_mode = 2
+text = "Equipement"
+
+[node name="Control" type="Control" parent="NinePatchRect/HBoxContainer/EquipementJoueur"]
+layout_mode = 2
+
+[node name="Casque" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 18.0
+offset_right = 109.0
+offset_bottom = 58.0
+texture = ExtResource("2_qn87y")
+
+[node name="Amulette" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 39.0
+offset_right = 61.0
+offset_bottom = 79.0
+texture = ExtResource("3_eq28m")
+
+[node name="Torse" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 63.0
+offset_right = 109.0
+offset_bottom = 103.0
+texture = ExtResource("4_ggwy5")
+
+[node name="Pantalon" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 110.0
+offset_right = 109.0
+offset_bottom = 150.0
+texture = ExtResource("5_44ldx")
+
+[node name="Ceinture" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 89.0
+offset_right = 159.0
+offset_bottom = 129.0
+texture = ExtResource("6_tsc3i")
+
+[node name="Bottes" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 158.0
+offset_right = 108.0
+offset_bottom = 198.0
+texture = ExtResource("7_lrxem")
+
+[node name="Anneau1" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 88.0
+offset_right = 61.0
+offset_bottom = 128.0
+texture = ExtResource("8_ewg8x")
+
+[node name="Anneau2" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 40.0
+offset_right = 158.0
+offset_bottom = 80.0
+texture = ExtResource("9_qmldd")
+
+[node name="Arme1" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 208.0
+offset_right = 60.0
+offset_bottom = 248.0
+texture = ExtResource("10_lrwmn")
+
+[node name="Arme2" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 206.0
+offset_right = 158.0
+offset_bottom = 246.0
+texture = ExtResource("10_lrwmn")
+
+[node name="Bouclier" type="TextureRect" parent="NinePatchRect/HBoxContainer/EquipementJoueur/Control"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 207.0
+offset_right = 108.0
+offset_bottom = 247.0
+texture = ExtResource("11_a8yj5")
+
+[node name="InventaireJoueur" type="VBoxContainer" parent="NinePatchRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="BoutonsCategorie" type="HBoxContainer" parent="NinePatchRect/HBoxContainer/InventaireJoueur"]
+layout_mode = 2
+
+[node name="GrilleItems" type="GridContainer" parent="NinePatchRect/HBoxContainer/InventaireJoueur"]
+layout_mode = 2

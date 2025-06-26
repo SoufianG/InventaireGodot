@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Epee" load_steps=4 format=3 uid="uid://bm5j3osyty63n"]
+
+[ext_resource type="Texture2D" uid="uid://mto7e43xwqts" path="res://Assets/Sprites/Items/resources/equip_epee_diamant.png" id="1_mxby5"]
+[ext_resource type="Script" uid="uid://t60oe31im6au" path="res://Scripts/Items/Armes/Epee.gd" id="1_p8lqg"]
+[ext_resource type="Texture2D" uid="uid://cbvfye8m81jvu" path="res://Assets/Sprites/Items/resources/epee_diamant_bg.png" id="2_exn2t"]
+
+[resource]
+script = ExtResource("1_p8lqg")
+damage_type = "Physique"
+range = 1.5
+attack_speed = 1.0
+slot = "Arme"
+perfection = 50
+stats = {}
+stats_theorique = {
+"force": Vector2(90, 115),
+"hp": Vector2(100, 150)
+}
+niveau = 5
+name = "Epée en diamant"
+description = "un stick, deux diamant tu connais"
+rank = "S"
+stackable = false
+item_type = "Ressource"
+loot_rate = 1.0
+icon = ExtResource("1_mxby5")
+inventory_icon = ExtResource("2_exn2t")
+metadata/_custom_type_script = "uid://t60oe31im6au"

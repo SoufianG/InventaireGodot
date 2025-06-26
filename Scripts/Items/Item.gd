@@ -9,6 +9,7 @@ class_name Item
 @export_enum("Equipement", "Ressource", "Consommable", "Quete") var item_type: String = "Ressource"
 @export_range(0.0, 1.0) var loot_rate: float = 1.0
 @export var icon: Texture2D
+@export var inventory_icon: Texture2D
 
 
 func get_rank_color() -> Color:

@@ -1206,4 +1206,7 @@ target_scene = "res://Scenes/World/Map1.tscn"
 target_spawn_node = "Spawn_from_Map2"
 fade_color = Color(0.221076, 0.616525, 0.467343, 1)
 
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(623, 342)
+
 [editable path="Area2D"]

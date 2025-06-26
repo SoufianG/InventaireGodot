@@ -3,7 +3,7 @@ extends Node
 func _ready():
 	await get_tree().process_frame
 
-	var base_epee = preload("res://Resources/Items/Equipements/Armes/EpeeFer.tres")
+	var base_epee = preload("res://Resources/Items/Equipements/Armes/Epées/EpeeDiamant.tres")
 
 	var loot = LootSystem.generate_random_equipement(base_epee)
 
